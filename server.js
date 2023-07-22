@@ -31,6 +31,12 @@ app.get('/', (req, res) => {
     res.send('Hello Aviral!');
 })
 
+app.use((req, res, next) => {
+    console.log(`using ${req.method} at ${req.url}`);
+    next();
+    // won't get reponse without calling next, response is not set in handlers
+})
+
 app.get('/messages', (req, res) => {
     res.send('<ul><li>How have you been?</li></ul>');
 })

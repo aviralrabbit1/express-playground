@@ -1,17 +1,25 @@
 # express-playground
 
-Initialise Project with 
+### Initialise Project 
 ```
 npm init -y
 ```
 
-Install **`express`** with 
+### Install **`express`** 
 ```
 npm install express
 ```
 
-Install **`nodemon`** (as devDependencies, needed while/for development, but not for running the project) with 
+### Install **`nodemon`** 
+#### (as devDependency, needed while/for development, but not for running the project) with 
 ```
 npm install nodemon --save-dev
 ```
 
+### Middelware
+```
+app.use(funcition, (req, res, next) => {
+
+})
+```
+Middelware endpoint will use app.METHOD(req, res)
