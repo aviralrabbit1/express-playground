@@ -40,6 +40,26 @@ app.use((req, res, next) => {
     console.log(`using ${req.method} at ${req.url} for ${duration}ms`);
 })
 
+app.use(express.json());
+// return middleware like above, looks up content type
+// set re.body to js object when content-tye = application/json
+
+app.post('/friends', (req, res) => {
+
+    if(!req.body.name){
+        // return will allow us to not set empty friends name, else will give error in console
+        return res.status(400).json({
+            error: 'Missing friend name'
+        });
+    }
+    const newFriend = {
+        name: req.body.name,
+        id: friends.length
+    };
+    friends.push(newFriend);
+    res.json(newFriend); // all req returns json, error or not
+});
+
 app.get('/messages', (req, res) => {
     res.send('<ul><li>How have you been?</li></ul>');
 })
