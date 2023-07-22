@@ -1,10 +1,12 @@
 # express-playground
 
-run ```
+Initialise Porject with 
+```
 npm init -y
 ```
 
-run ```
+Install express with 
+```
 npm install express
 ```
 
