@@ -32,9 +32,12 @@ app.get('/', (req, res) => {
 })
 
 app.use((req, res, next) => {
-    console.log(`using ${req.method} at ${req.url}`);
+    const start = Date.now();
     next();
     // won't get reponse without calling next, response is not set in handlers
+    const duration = Date.now() - start; // measuring amount of processing taken by node, different from 
+    // postman - measuring information making sense and returning back to it, takens longer
+    console.log(`using ${req.method} at ${req.url} for ${duration}ms`);
 })
 
 app.get('/messages', (req, res) => {
