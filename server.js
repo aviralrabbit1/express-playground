@@ -7,29 +7,6 @@ const app = express();
 
 const PORT = 3000;
 
-const friends = [
-    {
-        id: 0,
-        name: 'Arijit Sahai'
-    },
-    {
-        id: 1,
-        name: 'Ujjwal Dhir'
-    },
-    {
-        id: 2,
-        name: 'Naveen Kumar'
-    },
-    {
-        id: 3,
-        name: 'Divyanand'
-    },
-    {
-        id: 4,
-        name: 'Pranjal Agarwal'
-    }
-]
-
 app.get('/', (req, res) => {
     res.send('Hello Aviral!');
 })
@@ -47,39 +24,11 @@ app.use(express.json());
 // return middleware like above, looks up content type
 // set re.body to js object when content-tye = application/json
 
-app.post('/friends', (req, res) => {
+app.post('/friends', friendsController.postFriends);
 
-    if(!req.body.name){
-        // return will allow us to not set empty friends name, else will give error in console
-        return res.status(400).json({
-            error: 'Missing friend name'
-        });
-    }
-    const newFriend = {
-        name: req.body.name,
-        id: friends.length
-    };
-    friends.push(newFriend);
-    res.json(newFriend); // all req returns json, error or not
-});
+app.get('/friends', friendsController.getFriends);
 
-
-app.get('/friends', (req, res) => {
-    res.json(friends);
-})
-
-app.get('/friends/:friendId', (req, res) => {
-    const friendId = Number(req.params.friendId); // Number() or +req.params
-    const friend = friends[friendId];
-    if(friend){
-        res.status(200).json(friend);
-    }
-    else {
-        res.status(404).json({
-            error: "Friend does not exist"
-        });
-    }
-});
+app.get('/friends/:friendId', friendsController.getFriend);
 
 app.get('/messages',messagesController.getMessages);
 app.post('/messages',messagesController.postMessages);
