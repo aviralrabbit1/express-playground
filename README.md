@@ -23,3 +23,6 @@ app.use(funcition, (req, res, next) => {
 })
 ```
 Middelware endpoint will use app.METHOD(req, res)
+
+### Controller module
+one for each collection of data

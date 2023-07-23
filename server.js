@@ -1,5 +1,8 @@
 const express = require('express');
 
+const messagesController = require('./controllers/messages.controller');
+const friendsController = require('./controllers/friends.controller');
+
 const app = express();
 
 const PORT = 3000;
@@ -60,9 +63,6 @@ app.post('/friends', (req, res) => {
     res.json(newFriend); // all req returns json, error or not
 });
 
-app.get('/messages', (req, res) => {
-    res.send('<ul><li>How have you been?</li></ul>');
-})
 
 app.get('/friends', (req, res) => {
     res.json(friends);
@@ -81,9 +81,8 @@ app.get('/friends/:friendId', (req, res) => {
     }
 });
 
-app.post('/messages', (req, res) => {
-    console.log(`Updating messages`);
-})
+app.get('/messages',messagesController.getMessages);
+app.post('/messages',messagesController.postMessages);
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}...`)
