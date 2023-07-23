@@ -24,11 +24,14 @@ app.use(express.json());
 // return middleware like above, looks up content type
 // set re.body to js object when content-tye = application/json
 
-app.post('/friends', friendsController.postFriends);
+const friendsRouter = express.Router(); //middleware
 
-app.get('/friends', friendsController.getFriends);
+friendsRouter.post('/friends', friendsController.postFriends);
+friendsRouter.get('/friends', friendsController.getFriends);
+friendsRouter.get('/friends/:friendId', friendsController.getFriend);
 
-app.get('/friends/:friendId', friendsController.getFriend);
+app.use(friendsRouter); // mounting the router on app object
+// we can mount a group of path under a specific route
 
 app.get('/messages',messagesController.getMessages);
 app.post('/messages',messagesController.postMessages);
