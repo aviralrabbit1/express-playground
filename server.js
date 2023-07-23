@@ -1,7 +1,8 @@
 const express = require('express');
 
-const messagesController = require('./controllers/messages.controller');
-const friendsController = require('./controllers/friends.controller');
+const friendsRouter = require('./routes/friends.router');
+
+const messagesRouter = require('./routes/messages.router');
 
 const app = express();
 
@@ -24,17 +25,12 @@ app.use(express.json());
 // return middleware like above, looks up content type
 // set re.body to js object when content-tye = application/json
 
-const friendsRouter = express.Router(); //middleware
-
-friendsRouter.post('/friends', friendsController.postFriends);
-friendsRouter.get('/friends', friendsController.getFriends);
-friendsRouter.get('/friends/:friendId', friendsController.getFriend);
-
-app.use(friendsRouter); // mounting the router on app object
+app.use('/friends',friendsRouter); // mounting the router on app object
 // we can mount a group of path under a specific route
+// the friendsRouter paths will be set relative to path it is mounted on
+// creates a self container application on its own, not worried about other paths
 
-app.get('/messages',messagesController.getMessages);
-app.post('/messages',messagesController.postMessages);
+app.use('/messages',messagesRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}...`)
