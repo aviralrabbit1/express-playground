@@ -1,8 +1,8 @@
 const express = require('express');
 
-const friendsRouter = require('./routes/friends.router');
+const friendsRouter = require('./routers/friends.router');
 
-const messagesRouter = require('./routes/messages.router');
+const messagesRouter = require('./routers/messages.router');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
     // won't get reponse without calling next, response is not set in handlers
     const duration = Date.now() - start; // measuring amount of processing taken by node, different from 
     // postman - measuring information making sense and returning back to it, takens longer
-    console.log(`using ${req.method} at ${req.url} for ${duration}ms`);
+    console.log(`using ${req.method} at ${req.baseUrl}${req.url} for ${duration}ms`);
 })
 
 app.use(express.json());
