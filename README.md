@@ -29,3 +29,6 @@ Middelware endpoint will use app.METHOD(req, res)
 
 ### Models
 - To access the data from anywhere(controllers and/or view)
+
+### Express Router
+- we can mount a group of path under a specific route
