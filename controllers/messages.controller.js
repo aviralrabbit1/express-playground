@@ -1,10 +1,15 @@
+const path = require('path');
+
 // const getMessages = (req, res) => {
 //     res.send('<ul><li>How have you been?</li></ul>');
 // }
 
 // names function can be tracked in errors
 function getMessages(req, res){
-    res.send('<ul><li>How have you been?</li></ul>');
+    const image = path.join(__dirname,'..','public', 'images', 'TEDxHBTI.jpg');
+    res.sendFile(image);
+    // res.sendfile('../public/TEDxHBTI .jpg');
+    // res.send('<ul><li>How have you been?</li></ul>');
 }
 
 function postMessages(req, res){

@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 const friendsRouter = require('./routers/friends.router');
 
@@ -20,6 +21,9 @@ app.use((req, res, next) => {
     // postman - measuring information making sense and returning back to it, takens longer
     console.log(`using ${req.method} at ${req.baseUrl}${req.url} for ${duration}ms`);
 })
+
+app.use('/site',express.static(path.join(__dirname, 'public'))); // Middleware, relative path from where we start
+// app.use('/site',express.static('public')); // Not very RESTful as not serving from a collection of data
 
 app.use(express.json());
 // return middleware like above, looks up content type
