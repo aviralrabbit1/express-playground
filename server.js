@@ -7,11 +7,17 @@ const messagesRouter = require('./routers/messages.router');
 
 const app = express();
 
+app.set('view engine', 'hbs'); // info need to load handlebars internally
+app.set('views', path.join(__dirname,'views')); //find templates in project folder
+
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-    res.send('Hello Aviral!');
-})
+    res.render('index', {
+        title: "Express playground",
+        caption: "TEDxHBTU 2018"
+    });
+});
 
 app.use((req, res, next) => {
     const start = Date.now();
@@ -23,6 +29,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/site',express.static(path.join(__dirname, 'public'))); // Middleware, relative path from where we start
+// Serving static files
 // app.use('/site',express.static('public')); // Not very RESTful as not serving from a collection of data
 
 app.use(express.json());
